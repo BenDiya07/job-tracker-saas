@@ -44,26 +44,45 @@ export const register = async (req: Request, res: Response) => {
     }
 };
 
+const loginSchema = z.object({
+    email: z.string().email("Email invalide"),
+    password: z.string().min(1, "Le mot de passe est requis")
+});
+
 export const login = async (req: Request, res: Response) => {
     try {
-        const { email, password } = req.body;
+        // 1. Validation des données d'entrée
+        const validateData = loginSchema.parse(req.body);
 
-        // 1. Vérification si l'utilisateur existe par son email
-        const user = await prisma.user.findUnique({ where: { email } });
+        // 2. Vérification si l'utilisateur existe par son email
+        const user = await prisma.user.findUnique({ where: { email: validateData.email } });
         if (!user) return res.status(400).json({ message: "Email ou mot de passe incorrect." });
 
-        //2. Comparaison du mot de passe fourni avec le mot de passe haché en BDD
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
+        // 3. Comparaison du mot de passe fourni avec le mot de passe haché en BDD
+        // Pourquoi ? Sans cette vérification, n'importe qui pourrait se connecter en connaissant seulement l'email.
+        const passwordValid = await bcrypt.compare(validateData.password, user.password);
+        if (!passwordValid) return res.status(400).json({ message: "Email ou mot de passe incorrect." });
+
+        // 4. Génération du token. IMPORTANT: le payload doit correspondre à ce que lit le middleware d'auth ({ userId }).
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
 
         res.json({ token, id: user.id, name: user.name, email: user.email });
-    } catch (error: any) {
-        res.status(500).json({ message: error.message });
+    } catch (error) {
+        // Gestion des erreurs de validation Zod
+        if (error instanceof z.ZodError) {
+            return res.status(400).json({ message: "Données invalides.", errors: error.issues || error.message });
+        }
+        res.status(500).json({ message: "Erreur interne du serveur." });
     }
 };
 
 export const getProfile = async (req: AuthenticatedRequest, res: Response) => {
     try {
         // Grace au middleware d'authentification, on a accès à req.userId de maniere securisée
+        if (!req.userId) {
+            return res.status(401).json({ message: "Non autorisé." });
+        }
+
         const user = await prisma.user.findUnique({
             where: { id: req.userId },
             select: { id: true, name: true, email: true } // On exclut volontairement le password de la réponse !

@@ -1,5 +1,5 @@
 import type { Response } from 'express';
-import type { AuthenticatedRequest } from "../middlewares/auth.ts";
+import type { AuthenticatedRequest } from "../middlewares/auth.js";
 import { prisma } from '../config/db.js';
 import { z } from 'zod';
 
