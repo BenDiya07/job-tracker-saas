@@ -2,11 +2,9 @@
 
 A full-stack Job Application Tracking System built with modern web technologies. Monitor, manage, and track your job applications efficiently with a beautiful, recruiter-friendly interface.
 
-## 🚀 Live Demo
 
-[Add your live demo link here]
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [About the Project](#about-the-project)
 - [Tech Stack](#tech-stack)
@@ -16,7 +14,7 @@ A full-stack Job Application Tracking System built with modern web technologies.
 - [Screenshots](#screenshots)
 - [License](#license)
 
-## 📝 About the Project
+##  About the Project
 
 **Job Tracker SaaS** is a complete job application management platform that helps job seekers organize their applications, track progress, and stay on top of opportunities. The platform features:
 
@@ -26,7 +24,7 @@ A full-stack Job Application Tracking System built with modern web technologies.
 - **Responsive Design** - Works seamlessly on mobile, tablet, and desktop
 - **Modern UI** - Professional, eye-catching design that stands out to recruiters
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 ### Frontend
 - **Next.js 16** with React 19
@@ -43,7 +41,7 @@ A full-stack Job Application Tracking System built with modern web technologies.
 - **React Native** with Expo
 - Cross-platform support (iOS, Android, Web)
 
-## ✨ Features
+##  Features
 
 | Feature | Description |
 |---------|-------------|
@@ -54,7 +52,7 @@ A full-stack Job Application Tracking System built with modern web technologies.
 | **Responsive** | Mobile-first design working on all devices |
 | **Dark/Light Theme** | Automatic theme support |
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -149,20 +147,7 @@ jobs:
       - run: npm run build
 ```
 
-## 📸 Screenshots
 
-![Job Tracker Dashboard](screenshots/dashboard.png)
-![Job Application Form](screenshots/form.png)
-![Mobile View](screenshots/mobile.png)
 
-> *Add screenshots of your application to showcase the UI/UX*
 
-## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
----
-
-**Built with ❤️ by BenDiya07**
-
-*Ready to impress recruiters with a professional, full-stack SaaS application!*
