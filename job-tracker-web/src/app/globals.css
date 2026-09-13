@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+    color-scheme: dark;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 32%), linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background: rgba(14, 165, 233, 0.24);
+    color: #0f172a;
+}
+
+@layer components {
+    .app-shell {
+        min-height: 100vh;
+        padding: 2.5rem 1.5rem;
+        background: transparent;
+    }
+
+    .container {
+        width: min(100%, 72rem);
+        margin-inline: auto;
+    }
+
+    .card {
+        background: #ffffff;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        border-radius: 1.5rem;
+    }
+
+    .card-strong {
+        padding: 1.5rem;
+    }
+
+    .input-field {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border-radius: 1rem;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #0f172a;
+        font-size: 0.875rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .select-field {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border-radius: 1rem;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #0f172a;
+        font-size: 0.875rem;
+        appearance: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary {
+        width: 100%;
+        background: #0f172a;
+        color: white;
+        font-weight: 600;
+        padding: 0.75rem 1rem;
+        border-radius: 1rem;
+        border: none;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background: #111827;
+    }
+
+    .status-chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: #0f172a;
+    }
+
+    .section-subtitle {
+        color: #64748b;
+        margin-top: 0.25rem;
+    }
+}
