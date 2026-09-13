@@ -34,6 +34,9 @@ const XCircleSVG = ({ className }: { className?: string }) => (
     <SVG className={className} d="M9 9l6 6m0-6-6 6" />
 );
 
+type Status = 'applied' | 'interview' | 'offer' | 'rejected';
+type SortBy = 'newest' | 'oldest';
+
 interface Job {
     id: string;
     position: string;
@@ -46,11 +49,11 @@ export default function HomePage() {
     const [jobs, setJobs] = useState<Job[]>([]);
     const [title, setTitle] = useState('');
     const [company, setCompany] = useState('');
-    const [status, setStatus] = useState<'applied' | 'interview' | 'offer' | 'rejected'>('applied');
+    const [status, setStatus] = useState<Status>('applied');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
-    const [sortBy, setSortBy] = useState<'newest' | 'oldest'>('newest');
+    const [sortBy, setSortBy] = useState<SortBy>('newest');
 
     // 1. Récupération des données depuis l'API Express
     const fetchJobs = async () => {
@@ -62,8 +65,8 @@ export default function HomePage() {
             }
             const data = await res.json();
             setJobs(Array.isArray(data) ? data : []);
-        } catch (err: any) {
-            setError(err.message || "Impossible de se connecter à l'API Job Tracker.");
+        } catch (error: unknown) {
+            setError(error instanceof Error ? error.message : "Impossible de se connecter à l'API Job Tracker.");
             setJobs([]);
         } finally {
             setLoading(false);
@@ -97,7 +100,7 @@ export default function HomePage() {
                 console.error("Erreur renvoyée par le serveur :", errorData);
                 setError(errorData.error || "L'API a renvoyé une erreur lors de l'ajout.");
             }
-        } catch (err) {
+        } catch {
             setError("Erreur lors de l'ajout de l'offre.");
         } finally {
             setLoading(false);
@@ -215,7 +218,7 @@ export default function HomePage() {
                                 <label className="block text-xs font-semibold uppercase text-slate-500 mb-1">Statut initial</label>
                                 <select
                                     value={status}
-                                    onChange={(e) => setStatus(e.target.value as any)}
+                                    onChange={(e) => setStatus(e.target.value as Status)}
                                     className="select-field"
                                 >
                                     <option value="applied">En attente </option>
@@ -251,11 +254,11 @@ export default function HomePage() {
                             <div>
                                 <select
                                     value={sortBy}
-                                    onChange={(e) => setSortBy(e.target.value as any)}
+                                    onChange={(e) => setSortBy(e.target.value as SortBy)}
                                     className="select-field"
                                 >
-                                    <option value="newest">Plus récent d'abord</option>
-                                    <option value="oldest">Plus ancien d'abord</option>
+                                    <option value="newest">Plus récent d&apos;abord</option>
+                                    <option value="oldest">Plus ancien d&apos;abord</option>
                                 </select>
                             </div>
                             <div className="flex items-center gap-2">
