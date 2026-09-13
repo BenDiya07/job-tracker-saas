@@ -1,0 +1,15 @@
+{
+  "name": "job-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "job-tracker-api",
+    "job-tracker-web",
+    "job-tracker-mobile"
+  ],
+  "scripts": {
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm test --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present"
+  }
+}
